@@ -63,4 +63,9 @@
 
 ## 激活函数：
 
-* **Sigmoid**：1/(1+exp(-z)；其导数为：sigmoid\*(1-sigmoid)
+* **Sigmoid**：1/(1+exp(-z)；其导数为：sigmoid\*(1-sigmoid);
+* **Tanh**：(exp(x)-exp(-x))/(exp(x)+exp(-x))；**Sigmoid与Tanh之间的关系**：tanh(x)=2sigmoid(2x)-1；
+* **Sigmoid与Tanh对比**：
+   * sigmoid不关于原点对称，会偏移输入数据分布使其更易偏向饱和区；tanh关于原点对称；
+   * 在激活区，tanh的梯度大于sigmoid，因此收敛速度会更快；
+   * tanh的饱和区大于sigmoid，更容易产生梯度消失；
