@@ -73,4 +73,4 @@
 ## SENet-SE-Module：
 
 * **S**：传统的卷积，关注局部特征且输出混杂空间特征与通道特征，不能单独关注通道特征，S模块对每个通道的特征进行global ave pooling做全局编码，也可使用更复杂的编码方式；
-* **E**：S得到的特征没有编码通道间的关系，E模块编码通道间的关系，由两个全连接层构成的bottleneck模块，两个全连接层shape分别为(C/r)*C，C*(C/r)，r为超参数用于减少网络参数量，第一个全连接层的激活函数用ReLU，第二个全连接层的激活函数用sigmoid，使用sigmoid的原因为：SE模块获得的通道attention不是one-hot型，允许多个channel的特征贡献，因此使用sigmoid作为激活函数；
+* **E**：S得到的特征没有编码通道间的关系，E模块编码通道间的关系，由两个全连接层构成的bottleneck模块，两个全连接层shape分别为(C/r)*C，C*(C/r)，r为超参数用于减少网络参数量，第一个全连接层的激活函数用ReLU，第二个全连接层的激活函数用sigmoid，使用sigmoid的原因为：SE模块获得的通道attention不是one-hot型，允许多个channel的特征贡献，因此使用sigmoid作为激活函数，同时计算成本相对低；
