@@ -74,3 +74,12 @@
 
 * **S**：传统的卷积，关注局部特征且输出混杂空间特征与通道特征，不能单独关注通道特征，S模块对每个通道的特征进行global ave pooling做全局编码，也可使用更复杂的编码方式；
 * **E**：S得到的特征没有编码通道间的关系，E模块编码通道间的关系，由两个全连接层构成的bottleneck模块，两个全连接层shape分别为(C/r)*C，C*(C/r)，r为超参数用于减少网络参数量，第一个全连接层的激活函数用ReLU，第二个全连接层的激活函数用sigmoid，使用sigmoid的原因为：SE模块获得的通道attention不是one-hot型，允许多个channel的特征贡献，因此使用sigmoid作为激活函数，同时计算成本相对低；
+
+## 目标检测算法：
+
+* **Faster RCNN**：
+   * **原理**：two-stage算法，backbone进行特征提取，获得特征图通过RPN网络基于anchor设置选取proposals，获得的proposals与特征图通过ROI Pooling处理为固定大小的ROI特征图，再通过Fast RCNN检测器进行box的分类与回归；
+   * **RPN网络**：通过3*3卷积进行进一步的特征提取，其次通过两个并行的1*1卷积获得通道数分别为4K与2K的回归与分类结果；正负样本选取，与gt的IoU高于0.7或与gt的IoU最高的proposal为正样本，与gt的IoU低于0.3的proposal为负样本，控制正负样本数量为1:1，共256个；
+
+* **SSD**：
+   * **原理**：one-stage算法，原文中使用的backbone为截断的VGG-16，结合补充的4个extra layers，选取其中的6个
